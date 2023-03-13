@@ -21,11 +21,10 @@ public class Main {
             int j = 0;
             int k = 0;
             while (i < leftPart.size() && j < rightPart.size()) {
-                if (leftPart.get(i) < rightPart.get(j)) {
+                if (leftPart.get(i) < rightPart.get(j))
                     list.set(k++, leftPart.get(i++));
-                } else {
+                else
                     list.set(k++, rightPart.get(j++));
-                }
             }
             while (i < leftPart.size()) {
                 list.set(k++, leftPart.get(i++));
@@ -48,21 +47,37 @@ public class Main {
     // Задан целочисленный список. Найти минимальное, максимальное и среднее
     // значение.
     public static int findMinInList(ArrayList<Integer> list) {
-        list.sort(null);
-        return list.get(0);
+        int minNum = list.get(0);
+        for (int num : list) {
+            if (num < minNum)
+                minNum = num;
+        }
+        return minNum;
     }
 
     public static int findMaxInList(ArrayList<Integer> list) {
-        list.sort(null);
-        return list.get(list.size() - 1);
+        int maxNum = list.get(0);
+        for (int num : list) {
+            if (num > maxNum)
+                maxNum = num;
+        }
+        return maxNum;
     }
 
-    public static double findMedInList(ArrayList<Integer> list) {
-        list.sort(null);
-        if (list.size() % 2 == 0) {
-            return (double) (list.get(list.size() / 2 - 1) + list.get(list.size() / 2)) / 2;
+    public static double findAverageInList(ArrayList<Integer> list) {
+        double sum = 0;
+        for (int num : list) {
+            sum += num;
         }
-        return list.get(list.size() / 2);
+        return (double) (sum / list.size());
+    }
+
+    public static double findMedianInList(ArrayList<Integer> list) {
+        ArrayList<Integer> tempList = new ArrayList<>(list);
+        tempList.sort(null);
+        if (tempList.size() % 2 == 0)
+            return (double) (tempList.get(tempList.size() / 2 - 1) + tempList.get(tempList.size() / 2)) / 2;
+        return tempList.get(tempList.size() / 2);
     }
 
     // Дано два целочисленных списка, объеденить их не допуская элементы второго
@@ -84,7 +99,8 @@ public class Main {
         System.out.println(myList);
         System.out.println("min: " + findMinInList(myList));
         System.out.println("max: " + findMaxInList(myList));
-        System.out.println("med: " + findMedInList(myList));
+        System.out.println("average: " + findAverageInList(myList));
+        System.out.println("median: " + findMedianInList(myList));
         System.out.println();
         ArrayList<Integer> list1 = getRandomList(10, 10);
         System.out.println(list1);
